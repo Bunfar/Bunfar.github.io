@@ -45,7 +45,6 @@ ru: {
  'Создавал окружение для VR-тренажёров, занимался визуализацией и другими 3D-задачами.',
  'С декабря 2024 по июль 2025 года работал над личными стилизованными сценами, изучал PCG и Nanite, углублял навыки текстурирования реалистичных ассетов в Substance Painter. Создал локацию для мобильной игры на Unity и участвовал в проектах VR-тренажёров. В этот же период начал делать неофициальное фанатское дополнение по вселенной Fallout для настольной игры Smash Up.'
  ],
- workIntro:'Избранные локации из «Командиров Бездорожья». Мой вклад — художественное оформление окружения по блокаутам LD, освещение, отдельные модели, материалы и текстуры. Проект создавался командой.',
  workNames:['Алтай · Чулышман','Байконур · Млечный путь','Карелия · Гамбит','Карелия · Автодром'],workSub:'Командиры Бездорожья / Environment Artist',
  skills:[
  ['Художественное оформление уровней','Сборка и детализация локаций на основе блокаута, композиция, визуальная навигация, освещение и финальная доработка.'],
@@ -97,7 +96,7 @@ en:{
  ],freelanceTitle:'Freelance & personal projects',freelanceDate:'Since 2018 · individual projects',freelance:[
  'Created environments for VR training simulators, visualisations and other 3D projects.',
  'From December 2024 to July 2025, worked on personal stylised scenes, studied PCG and Nanite, and developed realistic asset-texturing skills in Substance Painter. Created a mobile-game environment in Unity and contributed to VR training projects. Also began an unofficial Fallout-themed fan expansion for the board game Smash Up.'
- ],workIntro:'Selected locations from Off-Road Commanders. My contribution includes environment art based on LD blockouts, lighting, selected props, materials and textures. These environments are a team production.',workNames:['Altai · Chulyshman','Baikonur · Milky Way','Karelia · Gambit','Karelia · Autodrome'],workSub:'Off-Road Commanders / Environment Artist',
+ ],workNames:['Altai · Chulyshman','Baikonur · Milky Way','Karelia · Gambit','Karelia · Autodrome'],workSub:'Off-Road Commanders / Environment Artist',
  skills:[
  ['Level Art','Environment assembly and detailing from blockouts, composition, visual navigation, lighting and final polish.'],
  ['Environment Art','Modelling, modular kits, UVs, baking and texturing, trim-sheet and UDIM workflows.'],
@@ -126,20 +125,35 @@ let stopScrollTracking=()=>{};
 let lang=new URLSearchParams(location.search).get('lang')==='en'?'en':'ru';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const section=(id,n,title,body)=>`<section class="section" id="${id}"><div class="section-title"><span>${n}</span><h2>${esc(title)}</h2></div>${body}</section>`;
+
+// Keep function words with the following word at every responsive width.
+const connectedWords = {
+ ru: 'а|без|безо|в|во|вне|для|до|за|и|из|изо|или|к|ко|как|между|на|над|надо|не|ни|но|о|об|обо|от|ото|по|под|подо|при|про|с|со|у|через',
+ en: 'a|an|the|and|or|as|at|by|for|from|in|into|of|on|onto|to|up|via|with|without|about|across|after|along|around|before|between|during|over|through|under|within'
+};
+function keepWordsTogether(root, language) {
+ const pattern = new RegExp('(?<![\\p{L}\\p{N}_])(?:' + connectedWords[language] + ')[ \t]+(?=\\S)', 'giu');
+ const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+ for (let node; (node = walker.nextNode());) {
+  if (node.parentElement.closest('script, style, noscript, code, pre')) continue;
+  node.nodeValue = node.nodeValue.replace(pattern, match => match.replace(/[ \t]+$/, '\u00a0'));
+ }
+}
+
 function render(){
  stopScrollTracking();
  const c=copy[lang];document.documentElement.lang=lang;document.title=`${c.title} — Environment / Level Artist`;
  document.querySelector('meta[name=description]').content=`${c.title} — Environment Artist / Level Artist. Unreal Engine, PC, VR.`;
  document.querySelector('#sidebar').innerHTML=`<a class="brand" href="#main"><b aria-hidden="true"></b>BUNFAR</a><div class="rail-role">Environment Artist<br>Level Artist</div><div class="preferences"><div class="langs" role="group" aria-label="Language / Язык"><button data-lang="ru" aria-pressed="${lang==='ru'}" lang="ru">RU</button><button data-lang="en" aria-pressed="${lang==='en'}" lang="en">EN</button></div><button class="theme-toggle" type="button" aria-pressed="false"><span class="theme-icon" aria-hidden="true">◐</span><span class="theme-label"></span></button></div><nav aria-label="${lang==='ru'?'Разделы':'Sections'}">${c.nav.map((t,i)=>`<a href="#${ids[i]}" data-section="${ids[i]}">${t}<small>0${i+1} ↘</small></a>`).join('')}</nav><div class="rail-bottom"><div class="contacts">${contactLinks.map(x=>`<a href="${esc(x.href)}" ${x.href.startsWith('https')?externalAttrs:''} class="${x.primary?'primary-contact':''}">${x.name} ↗</a>`).join('')}</div><p>${c.location}<br><br>${c.availability}</p></div>`;
  const jobs=c.jobs.map((j,i)=>`<article class="job"><div class="job-head"><h3>${esc(j.company)}</h3><div class="role">${esc(j.role)}</div><div class="date">${esc(j.date)}</div></div><div class="job-body"><div class="project-label">${esc(j.project)}</div>${j.intro?`<p>${esc(j.intro)}</p>`:''}<ul>${j.bullets.map((b,k)=>`<li${i===0&&k===0?' class="result"':''}>${esc(b)}</li>`).join('')}</ul>${i===0?`<p class="release"><a class="textlink" href="https://vkplay.ru/play/game/kombez-43452/" ${externalAttrs}>${lang==='ru'?'Командиры Бездорожья · старт ОБТ в августе 2026 ↗':'Off-Road Commanders · open beta launched August 2026 ↗'}</a></p>`:''}${j.link?`<a class="textlink" href="${j.link}" ${j.link.startsWith('https')?'target="_blank" rel="noopener noreferrer"':''}>${esc(j.linkText)}</a>`:''}</div></article>`).join('');
- const gallery=works.map((w,i)=>`<figure class="work"><button data-work="${i}" aria-label="${c.gallery}: ${esc(c.workNames[i])}"><img loading="lazy" decoding="async" src="assets/${w.images[0]}.webp" alt="${esc(c.workNames[i])}" width="2000" height="1125"><span class="expand" aria-hidden="true">↗</span></button><figcaption><div class="work-caption"><h3>${esc(c.workNames[i])}</h3><a href="https://www.artstation.com/artwork/${w.id}" target="_blank" rel="noopener noreferrer">ArtStation ↗</a></div><p>${esc(c.workSub)}</p></figcaption></figure>`).join('');
+ const gallery=works.map((w,i)=>`<figure class="work"><button data-work="${i}" aria-label="${c.gallery}: ${esc(c.workNames[i])}"><img loading="lazy" decoding="async" src="assets/${w.images[0]}.webp" alt="${esc(c.workNames[i])}" width="2000" height="1125"><span class="expand" aria-hidden="true">+</span></button><figcaption><div class="work-caption"><h3>${esc(c.workNames[i])}</h3><a href="https://www.artstation.com/artwork/${w.id}" target="_blank" rel="noopener noreferrer">ArtStation ↗</a></div><p>${esc(c.workSub)}</p></figcaption></figure>`).join('');
  document.querySelector('#main').innerHTML=`<header class="hero"><div class="topline"><span class="eyebrow">${c.cv}</span><a class="eyebrow contact-cta" href="#contact">${c.contact}</a></div><h1>${c.name}</h1><div class="hero-role"><h2>Environment Artist<br>/ Level Artist</h2><p>${c.hello}</p></div><div class="mobile-meta"><p>${c.location}<br>${c.availability}</p><a href="https://t.me/bunfar" target="_blank" rel="noopener noreferrer">Telegram ↗</a> · <a href="https://www.artstation.com/ibunfar" target="_blank" rel="noopener noreferrer">ArtStation ↗</a></div><figure class="hero-pic"><img class="hero-image" src="assets/Altai_3.webp" width="2000" height="563" alt="${c.heroNote}" fetchpriority="high"><figcaption class="image-note"><span>${c.heroNote}</span><span>${c.heroCredit}</span></figcaption></figure></header>`+
  section('about','01',c.nav[0],`<div class="about-grid"><div class="about-lead"><p>${esc(c.about[0])}</p><p>${esc(c.about[1])}</p></div><div class="about-detail"><p>${esc(c.about[2])}</p><p>${esc(c.about[3])}</p></div></div>`)+
  section('experience','02',c.nav[1],jobs+`<article class="job"><div class="job-head"><h3>${c.freelanceTitle}</h3><div class="date">${c.freelanceDate}</div></div><div class="job-body">${c.freelance.map(t=>`<p>${esc(t)}</p>`).join('')}</div></article>`)+
- section('work','03',c.nav[2],`<p class="section-intro">${c.workIntro}</p><div class="work-grid">${gallery}</div>`)+
+ section('work','03',c.nav[2],`<div class="work-grid">${gallery}</div><p class="section-intro work-more">${lang==='ru'?'Ещё больше моих работ на':'More of my work on'}&nbsp;<a href="https://www.artstation.com/ibunfar" ${externalAttrs}>ArtStation ↗</a></p>`)+
  section('skills','04',c.nav[3],`<div class="skills">${c.skills.map(([h,p])=>`<div class="skill"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('')}</div><div class="tools"><h3>${c.toolsTitle}</h3><p><b>${c.primary}:</b> Unreal Engine 5, Blender, Substance 3D Designer, Substance 3D Painter.</p><p><b>${c.additional}:</b> Photoshop, Figma / FigJam, PureRef, Quixel Mixer, ZBrush, SpeedTree, Marvelous Designer, World Machine, Gaea, DaVinci Resolve, Git.</p></div>`)+
  `<div class="background-block" id="background">`+`<div class="misc"><div><h3>${c.educationTitle}</h3><p>${c.education}</p><p>${c.educationSub}</p></div><div><h3>${c.languagesTitle}</h3>${c.languages.map(t=>`<p>${t}</p>`).join('')}</div></div></div>`+
- section('contact','05',c.nav[4],`<p class="contact-intro">${lang==='ru'?'Удобнее всего связаться со мной в Telegram. Другие контакты и профили — ниже.':'Telegram is the easiest way to reach me. You can also use the links below.'}</p><div class="contact-grid">${contactLinks.map(x=>`<a class="contact-card ${x.primary?'featured':''}" href="${esc(x.href)}" ${x.href.startsWith('https')?externalAttrs:''}><span class="contact-name">${x.name}<span aria-hidden="true">↗</span></span><span class="contact-address">${esc(x.label)}</span>${x.primary?`<span class="contact-hint">${lang==='ru'?'Написать мне':'Message me'}</span>`:''}</a>`).join('')}</div><p class="contact-location">${c.location} · ${c.availability}</p>`)+
+ section('contact','05',c.nav[4],`<div class="contact-grid">${contactLinks.map(x=>`<a class="contact-card ${x.primary?'featured':''}" href="${esc(x.href)}" ${x.href.startsWith('https')?externalAttrs:''}><span class="contact-name">${x.name}<span aria-hidden="true">↗</span></span><span class="contact-address">${esc(x.label)}</span>${x.primary?`<span class="contact-hint">${lang==='ru'?'Написать мне':'Message me'}</span>`:''}</a>`).join('')}</div><p class="contact-location">${c.location} · ${c.availability}</p>`)+
  `<footer><span>© ${new Date().getFullYear()} ${c.title}</span><a href="#main">${c.back}</a></footer>`;
  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{const focus=b.dataset.lang;lang=focus;const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);render();document.querySelector(`[data-lang="${focus}"]`).focus({preventScroll:true});}));
  document.querySelectorAll('[data-work]').forEach(b=>b.addEventListener('click',()=>openWork(Number(b.dataset.work))));
@@ -150,6 +164,8 @@ function render(){
   syncThemeButton();
  });
  syncThemeButton();
+ keepWordsTogether(document.querySelector('#sidebar'), lang);
+ keepWordsTogether(document.querySelector('#main'), lang);
  stopScrollTracking=trackSections();
 }
 function syncThemeButton(){
