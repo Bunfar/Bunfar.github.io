@@ -1,0 +1,140 @@
+/* Larger screens keep the same hierarchy, with fluid type and wider content. */
+main{max-width:none}
+.image-note{font-size:12px;line-height:1.6;flex-wrap:wrap}
+.eyebrow{font-size:12px}
+.date,.project-label{font-size:12px}
+.work-caption a{font-size:12px}
+.textlink{font-size:13px;line-height:1.7}
+nav{gap:4px}
+nav a{padding:10px 12px;margin:0 -12px;transition:background-color .15s,color .15s}
+nav a[aria-current=location]{background:var(--accent);color:var(--ink)}
+nav a[aria-current=location] small{color:inherit}
+.contact-cta{background:var(--ink);color:var(--paper);padding:9px 14px;align-self:center}
+.topline{align-items:center}
+.contact-cta:hover{background:var(--accent);color:var(--ink)}
+.primary-contact{font-weight:bold}
+.contacts a{padding:3px 0}
+.rail-bottom{font-size:13px}
+.release{margin:17px 0 10px!important}
+.background-block{border-top:1px solid var(--line);padding:25px 0 40px;scroll-margin-top:24px}
+.contact-intro{max-width:65ch;font-size:18px;margin:0 0 28px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.contact-card{border:1px solid var(--ink);padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:12px;min-height:145px}
+.contact-card.featured{background:var(--accent)}
+.contact-card:hover{background:var(--ink);color:var(--paper)}
+.contact-name{display:flex;justify-content:space-between;gap:12px;font-size:25px;letter-spacing:-.04em}
+.contact-address{font:13px/1.5 monospace;overflow-wrap:anywhere}
+.contact-hint{font-size:13px;margin-top:auto}
+.contact-location{font-size:14px;margin:25px 0 0}
+@media(min-width:1800px){
+ :root{--rail:clamp(270px,12vw,480px)}
+ aside{padding:clamp(28px,1.2vw,48px)}
+ .brand{font-size:clamp(25px,1.2vw,43px)}
+ .brand b{width:.55em;height:.55em}
+ .rail-role{font-size:clamp(15px,.74vw,27px)}
+ .langs button{font-size:clamp(13px,.6vw,22px);padding:.4em .85em}
+ nav{margin:clamp(35px,2.2vw,75px) 0}
+ nav a{font-size:clamp(16px,.78vw,29px);padding:.65em .7em;margin:0 -.7em}
+ nav small{font-size:clamp(12px,.54vw,20px)}
+ .rail-bottom{font-size:clamp(14px,.66vw,24px)}
+ .contacts{gap:.3em}
+ main{padding:0 clamp(45px,2.2vw,100px)}
+ .topline{padding:clamp(24px,1.2vw,46px) 0 20px}
+ .eyebrow,.image-note{font-size:clamp(13px,.58vw,23px)}
+ .image-note{padding:.65em 0}
+ .hero h1{font-size:clamp(130px,6.3vw,270px);margin:.24em 0 .18em}
+ .hero-role{padding-bottom:clamp(28px,1.5vw,64px)}
+ .hero-role h2{font-size:clamp(32px,1.5vw,58px)}
+ .hero-role p{font-size:clamp(18px,.85vw,32px);max-width:29ch}
+ .hero-image{max-height:58vh}
+ .section{padding:clamp(32px,1.5vw,60px) 0 clamp(45px,2.5vw,90px)}
+ .section-title{gap:24px;margin-bottom:clamp(30px,1.6vw,60px)}
+ .section-title h2{font-size:clamp(38px,1.8vw,70px)}
+ .section-title span{font-size:clamp(13px,.58vw,23px)}
+ .about-grid{gap:clamp(40px,3vw,130px);grid-template-columns:1fr 1fr}
+ .about-lead{font-size:clamp(27px,1.25vw,48px);max-width:52ch}
+ .about-detail{font-size:clamp(19px,.88vw,34px);max-width:80ch}
+ .about-grid p{margin-bottom:1em}
+ .job{grid-template-columns:clamp(250px,13vw,530px) minmax(0,1fr);gap:clamp(35px,2vw,85px);padding:clamp(35px,2vw,80px) 0}
+ .job-head h3{font-size:clamp(30px,1.4vw,54px)}
+ .job-head .role{font-size:clamp(17px,.8vw,31px)}
+ .date,.project-label{font-size:clamp(14px,.64vw,25px)}
+ .job-body p,.job-body li{font-size:clamp(18px,.85vw,32px)}
+ .job-body p{max-width:90ch}
+ .job-body li{padding-left:1.1em;padding-bottom:.9em;break-inside:avoid}
+ .job-body li.result{font-size:clamp(26px,1.25vw,48px);column-span:all;max-width:75ch;padding-bottom:1em}
+ .textlink{font-size:clamp(15px,.7vw,27px)}
+ .section-intro{font-size:clamp(17px,.8vw,31px);max-width:95ch}
+ .work-grid{gap:40px clamp(25px,1.5vw,65px)}
+ .work h3{font-size:clamp(26px,1.25vw,48px)}
+ .work p,.work-caption a{font-size:clamp(14px,.65vw,25px)}
+ .work-caption{margin-top:18px}
+ .skills{gap:35px 65px}
+ .skill h3,.misc h3{font-size:clamp(21px,1vw,38px)}
+ .skill p,.tools,.misc p{font-size:clamp(18px,.85vw,32px)}
+ .skill p{max-width:78ch}
+ .tools{margin-top:45px;padding-top:30px}
+ .background-block{padding:35px 0 60px}
+ .contact-intro{font-size:clamp(22px,1.1vw,40px)}
+ .contact-card{padding:clamp(24px,1.2vw,50px);min-height:clamp(170px,9vw,340px)}
+ .contact-grid{gap:20px}
+ .contact-name{font-size:clamp(30px,1.5vw,58px)}
+ .contact-address,.contact-hint,.contact-location{font-size:clamp(17px,.8vw,31px)}
+ footer{font-size:clamp(14px,.65vw,25px);padding:30px 0 45px}
+}
+@media(min-width:2200px){.job-body ul{column-count:2;column-gap:clamp(35px,2.5vw,110px)}}
+@media(min-width:3000px) and (min-aspect-ratio:21/9){
+ .work-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .work-caption{flex-wrap:wrap}
+ .skills{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .contact-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+}
+@media(max-width:1050px){.contact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ nav{gap:4px;margin:16px 0 0;flex-wrap:wrap;justify-content:flex-start}
+ nav a{padding:8px;margin:0;font-size:12px}
+ .topline .eyebrow{font-size:10px}
+ .contact-cta{padding:8px 10px;white-space:nowrap}
+ .image-note{font-size:11px}
+ .work-caption a{font-size:12px}
+ .contact-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .contact-card{padding:16px;min-height:130px;gap:9px}
+ .contact-card.featured{grid-column:1/-1;min-height:140px}
+ .contact-name{font-size:23px}
+ .contact-address{font-size:11px}
+ .contact-intro{font-size:16px}
+ .contact-location{font-size:13px}
+ .contact-cta:focus-visible{outline-offset:3px}
+}
+@media print{.contact-cta{display:none}.contact-grid{grid-template-columns:repeat(3,1fr)}.contact-card{min-height:0}}
+nav a[aria-current=location],.contact-card.featured{color:#111}
+.contact-card.featured:hover{color:var(--paper)}
+/* Light is the default; dark is selected explicitly and remembered locally. */
+html{color-scheme:light}
+html[data-theme=dark]{color-scheme:dark;--paper:#191a18;--ink:#e9e8e1;--muted:#b2b3aa;--line:#53554d}
+.preferences{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:5px 8px;min-height:30px;font:11px/1.5 monospace}
+.theme-toggle:hover{background:var(--ink);color:var(--paper)}
+.theme-icon{font:18px/1 Arial,sans-serif}
+html[data-theme=dark] dialog{background:#20201e;color:#e9e8e1;border-color:#696a62}
+html[data-theme=dark] .viewerbar button{color:#e9e8e1}
+html[data-theme=dark] dialog::backdrop{background:#000e}
+@media(min-width:1800px){.theme-toggle{font-size:clamp(12px,.6vw,22px);padding:.4em .65em;min-height:0}.theme-icon{font-size:1.4em}.preferences{gap:12px}}
+@media(max-width:760px){.preferences{grid-column:2;grid-row:1;gap:8px;flex-wrap:nowrap}.preferences .langs{display:flex}.theme-label{display:none}.theme-toggle{width:32px;height:30px;padding:3px}.theme-icon{font-size:20px}}
+@media print{html[data-theme=dark]{--paper:white;--ink:#20201e;--muted:#61615a;--line:#afafa5;color-scheme:light}.preferences{display:none}}
+/* Stable placement in both languages and themes. */
+.preferences{flex-direction:column;align-items:flex-start;flex-wrap:nowrap}
+.theme-toggle{white-space:nowrap;min-inline-size:145px}
+.hero-role p{inline-size:34ch;max-inline-size:48%;max-width:none;min-block-size:3.1em;line-height:1.55}
+@media(max-width:1050px) and (min-width:761px){.hero-role p{inline-size:34ch;max-inline-size:48%;max-width:none}}
+@media(max-width:760px){
+ .preferences{align-items:flex-end;gap:7px}
+ .preferences .langs{grid-column:auto;grid-row:auto}
+ .theme-toggle{min-inline-size:0;width:auto;height:30px;padding:4px 8px}
+ .theme-label{display:inline;font-size:10px}
+ .hero-role p{inline-size:100%;max-inline-size:none;max-width:none;min-block-size:3.1em}
+}
+@media(min-width:761px){.theme-toggle{inline-size:max(145px,11em)}}
+/* Equal tracking without pair-specific kerning; retain the name's word space. */
+.hero h1{font-kerning:none;font-variant-ligatures:none;font-feature-settings:"kern" 0,"liga" 0;letter-spacing:.012em;word-spacing:.08em}
+@media(max-width:760px){.hero h1{font-size:clamp(28px,8.2vw,62px)}}
